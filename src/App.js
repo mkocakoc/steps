@@ -1,32 +1,35 @@
-const message =  [
-  "Step 1 , world!",
+import { useState } from "react";
+
+const message = [
+  "Step 1, world!",
   "Step 2: Learn React",
   "Awesome! You're ready to learn React!"
 ];
 
 export default function App() {
-  const steps = 1;
+  const [steps, setSteps] = useState(1); 
+  console.log(steps);
 
-  function previusFnc() {
-    steps > 1 ? steps - 1 : steps;
+  function previousFunc() {
+    setSteps(prevSteps => (prevSteps > 1 ? prevSteps - 1 : prevSteps));
   }
 
-  function nextFnc() {
-    steps < 3 ? steps + 1 : steps;
+  function nextFunc() {
+    setSteps(prevSteps => (prevSteps < 3 ? prevSteps + 1 : prevSteps)); 
   }
 
   return (
     <div className="steps">
       <div className="numbers">
-        <div className={`${steps >=  1 ?   'active': "" }`}>1</div>
-        <div className={`${steps >=  2 ?   'active': "" }`}>2</div>
-        <div className={`${steps >=  3 ?   'active': "" }`}>3</div>
+        <div className={`${steps >= 1 ? 'active' : ""}`}>1</div>
+        <div className={`${steps >= 2 ? 'active' : ""}`}>2</div>
+        <div className={`${steps >= 3 ? 'active' : ""}`}>3</div>
       </div>
 
-      <p className="message">Steps {steps} : {message [steps - 1]} !</p>
+      <p className="message">Steps {steps}: {message[steps - 1]}!</p>
       <div className="buttons">
-        <button style={{ background: "#7950f2", color: "#fff" }} onClick={previusFnc}>Prev</button>
-        <button style={{ background: "#7950f2", color: "#fff" }} onClick={nextFnc}>Next</button>
+        <button style={{ background: "#7950f2", color: "#fff" }} onClick={previousFunc}>Prev</button>
+        <button style={{ background: "#7950f2", color: "#fff" }} onClick={nextFunc}>Next</button>
       </div>
     </div>
   );
